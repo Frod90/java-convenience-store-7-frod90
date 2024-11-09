@@ -16,11 +16,11 @@ public class Stock {
 		return new Stock(product);
 	}
 
-	public void incrementPromotionCount(int promotionQuantity) {
+	public void incrementPromotionQuantity(int promotionQuantity) {
 		this.promotionQuantity += promotionQuantity;
 	}
 
-	public void incrementGeneralCount(int generalQuantity) {
+	public void incrementGeneralQuantity(int generalQuantity) {
 		this.generalQuantity += generalQuantity;
 	}
 
