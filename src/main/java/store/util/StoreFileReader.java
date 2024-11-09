@@ -8,15 +8,15 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class FileReader {
+public class StoreFileReader {
 
 	private static final int HEADER_INDEX = 1;
 	private static final String DELIMITER = ",";
 
-	private FileReader() {
+	private StoreFileReader() {
 	}
 
-	public static List<String[]> readFile(String filePath) {
+	public static List<String[]> readWithoutHeader(String filePath) {
 		try (Stream<String> readLines = Files.lines(Paths.get(filePath))) {
 			List<String> readLinesWithoutHeader = readLines
 				.skip(HEADER_INDEX)
