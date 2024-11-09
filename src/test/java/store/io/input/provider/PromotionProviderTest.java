@@ -13,14 +13,14 @@ class PromotionProviderTest {
 
 	@DisplayName("파일을 읽어와 프로모션 목록을 생성할 수 있다.")
 	@Test
-	void readPromotionFile() {
+	void provide() {
 
 		// given
 		PromotionProvider promotionProvider = new PromotionProvider();
 		String filePath = "src/test/resources/test_promotions.md";
 
 		// when
-		Promotions promotions = promotionProvider.readPromotionFile(filePath);
+		Promotions promotions = promotionProvider.provide(filePath);
 
 		// then
 		assertThat(promotions).extracting("promotions")

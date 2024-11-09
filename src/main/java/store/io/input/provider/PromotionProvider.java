@@ -19,7 +19,7 @@ public class PromotionProvider {
 	private static final int START_DATE_INDEX = 3;
 	private static final int END_DATE_INDEX = 4;
 
-	public Promotions readPromotionFile(String promotionFilePath) {
+	public Promotions provide(String promotionFilePath) {
 		List<String[]> readInfos = StoreFileReader.readWithoutHeader(promotionFilePath);
 		return createPromotions(readInfos);
 	}
