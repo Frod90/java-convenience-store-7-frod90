@@ -1,8 +1,6 @@
 package store.domain;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Promotions {
 
@@ -12,9 +10,8 @@ public class Promotions {
 		this.promotions = promotions;
 	}
 
-	public static Promotions from(List<Promotion> promotions) {
-		return new Promotions(promotions.stream()
-			.collect(Collectors.toMap(Promotion::getName, promotion -> promotion)));
+	public static Promotions from(Map<String, Promotion> promotions) {
+		return new Promotions(promotions);
 	}
 
 	public Promotion findBy(String promotionName) {
