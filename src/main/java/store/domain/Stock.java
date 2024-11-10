@@ -43,6 +43,16 @@ public class Stock {
 		return product.hasActivePromotion(comparedDateTime);
 	}
 
+	public void validateOverFlowPurchasedQuantity(int purchasedQuantity) {
+		if (hasOverFlowPurchasedQuantity(purchasedQuantity)) {
+			throw new IllegalArgumentException(OVER_FLOW_STOCK_QUANTITY.getMessage());
+		}
+	}
+
+	private boolean hasOverFlowPurchasedQuantity(int purchasedQuantity) {
+		return purchasedQuantity > promotionQuantity + generalQuantity;
+	}
+
 	public Product getProduct() {
 		return product;
 	}
