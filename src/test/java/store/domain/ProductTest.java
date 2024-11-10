@@ -15,6 +15,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class ProductTest {
 
+	private static Stream<Arguments> provideDateTimeForCheckingActivePromotion() {
+		return Stream.of(
+			Arguments.of(LocalDateTime.of(2001, 5, 10, 23, 59, 59), false),
+			Arguments.of(LocalDateTime.of(2001, 5, 11, 0, 0, 0), true),
+			Arguments.of(LocalDateTime.of(2001, 6, 10, 23, 59, 59), true),
+			Arguments.of(LocalDateTime.of(2001, 6, 12, 0, 0, 0), false)
+		);
+	}
+
 	@DisplayName("프로모션을 가진 상품을 생성할 수 있다.")
 	@Test
 	void createWithPromotion() {
@@ -98,13 +107,58 @@ class ProductTest {
 		assertThat(result).isEqualTo(expect);
 	}
 
-	private static Stream<Arguments> provideDateTimeForCheckingActivePromotion() {
-		return Stream.of(
-			Arguments.of(LocalDateTime.of(2001, 5, 10, 23, 59, 59), false),
-			Arguments.of(LocalDateTime.of(2001, 5, 11, 0, 0, 0), true),
-			Arguments.of(LocalDateTime.of(2001, 6, 10, 23, 59, 59), true),
-			Arguments.of(LocalDateTime.of(2001, 6, 12, 0, 0, 0), false)
+	@DisplayName("프로 모션 증정 수량을 계산할 수 있다")
+	@Test
+	void calculateFreeQuantity() {
+		// given
+		Promotion promotion01 = Promotion.of("Frod Promotion", 1, 1,
+			LocalDateTime.of(2001, 4, 21, 0, 0),
+			LocalDateTime.of(2001, 5, 21, 0, 0)
 		);
+
+		Product product = Product.create("티즐", 1500, promotion01);
+
+		// when
+		int freeQuantity = product.calculateFreeQuantity(6);
+
+		// then
+		assertThat(freeQuantity).isEqualTo(3);
+	}
+
+	@DisplayName("프로 모션이 적용되지 않는 수량을 계산할 수 있다")
+	@Test
+	void calculateRestQuantity() {
+		// given
+		Promotion promotion01 = Promotion.of("Frod Promotion", 1, 1,
+			LocalDateTime.of(2001, 4, 21, 0, 0),
+			LocalDateTime.of(2001, 5, 21, 0, 0)
+		);
+
+		Product product = Product.create("티즐", 1500, promotion01);
+
+		// when
+		int restQuantity = product.calculateRestQuantity(5);
+
+		// then
+		assertThat(restQuantity).isEqualTo(1);
+	}
+
+	@DisplayName("무료로 얻을 수 있는 프로 모션 추가 수량을 계산할 수 있다")
+	@Test
+	void calculateExtraQuantity() {
+		// given
+		Promotion promotion01 = Promotion.of("Frod Promotion", 2, 2,
+			LocalDateTime.of(2001, 4, 21, 0, 0),
+			LocalDateTime.of(2001, 5, 21, 0, 0)
+		);
+
+		Product product = Product.create("티즐", 1500, promotion01);
+
+		// when
+		int extraQuantity = product.calculateExtraQuantity(6);
+
+		// then
+		assertThat(extraQuantity).isEqualTo(2);
 	}
 
 	private Promotions createPromotions() {
@@ -129,4 +183,5 @@ class ProductTest {
 
 		return Promotions.from(inputPromotions);
 	}
+
 }

@@ -13,6 +13,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class PromotionTest {
 
+	private static Stream<Arguments> provideDateTimeForCheckingActive() {
+		return Stream.of(
+			Arguments.of(LocalDateTime.of(2001, 4, 20, 23, 59, 59), false),
+			Arguments.of(LocalDateTime.of(2001, 4, 21, 0, 0), true),
+			Arguments.of(LocalDateTime.of(2001, 5, 20, 23, 59, 59), true),
+			Arguments.of(LocalDateTime.of(2001, 5, 21, 0, 0, 0), false)
+		);
+	}
+
 	@DisplayName("프로모션을 생성할 수 있다.")
 	@Test
 	void of() {
@@ -57,13 +66,13 @@ class PromotionTest {
 	@DisplayName("프로모션을 가지고 있는지 확인할 수 있다.")
 	@Test
 	void isPromotionWithPromotion() {
-	    // given
+		// given
 		Promotion promotion = Promotion.of("Frod Promotion", 1, 1,
 			LocalDateTime.of(2001, 4, 21, 0, 0),
 			LocalDateTime.of(2001, 5, 21, 0, 0)
 		);
 
-	    // when
+		// when
 		boolean result = promotion.isPromotion();
 
 		// then
@@ -73,10 +82,10 @@ class PromotionTest {
 	@DisplayName("none 프로모션을 가지고 있는지 확인할 수 있다.")
 	@Test
 	void isPromotionWithNonePromotion() {
-	    // given
+		// given
 		Promotion promotion = Promotion.getNoneInstance();
 
-	    // when
+		// when
 		boolean result = promotion.isPromotion();
 
 		// then
@@ -100,14 +109,52 @@ class PromotionTest {
 		assertThat(result).isEqualTo(expect);
 	}
 
-	private static Stream<Arguments> provideDateTimeForCheckingActive() {
-		return Stream.of(
-			Arguments.of(LocalDateTime.of(2001, 4, 20, 23, 59, 59), false),
-			Arguments.of(LocalDateTime.of(2001, 4, 21, 0, 0), true),
-			Arguments.of(LocalDateTime.of(2001, 5, 20, 23, 59, 59), true),
-			Arguments.of(LocalDateTime.of(2001, 5, 21, 0, 0, 0), false)
+	@DisplayName("프로 모션 증정 수량을 계산할 수 있다")
+	@Test
+	void calculateFreeQuantity() {
+		// given
+		Promotion promotion = Promotion.of("Frod Promotion", 2, 1,
+			LocalDateTime.of(2001, 4, 21, 0, 0),
+			LocalDateTime.of(2001, 5, 21, 0, 0)
 		);
+
+		// when
+		int freeQuantity = promotion.calculateFreeQuantity(7);
+
+		// then
+		assertThat(freeQuantity).isEqualTo(2);
 	}
 
+	@DisplayName("프로 모션이 적용되지 않는 수량을 계산할 수 있다")
+	@Test
+	void calculateRestQuantity() {
+		// given
+		Promotion promotion = Promotion.of("Frod Promotion", 3, 1,
+			LocalDateTime.of(2001, 4, 21, 0, 0),
+			LocalDateTime.of(2001, 5, 21, 0, 0)
+		);
+
+		// when
+		int restQuantity = promotion.calculateRestQuantity(7);
+
+		// then
+		assertThat(restQuantity).isEqualTo(3);
+	}
+
+	@DisplayName("무료로 얻을 수 있는 프로 모션 추가 수량을 계산할 수 있다")
+	@Test
+	void calculateExtraQuantity() {
+		// given
+		Promotion promotion = Promotion.of("Frod Promotion", 2, 3,
+			LocalDateTime.of(2001, 4, 21, 0, 0),
+			LocalDateTime.of(2001, 5, 21, 0, 0)
+		);
+
+		// when
+		int extraQuantity = promotion.calculateExtraQuantity(6);
+
+		// then
+		assertThat(extraQuantity).isEqualTo(0);
+	}
 
 }
