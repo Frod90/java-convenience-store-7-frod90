@@ -34,13 +34,13 @@ public class InputHandler {
 	public Map<String, Integer> getOrder() {
 		System.out.println(INPUT_ORDERS_COMMENT);
 		String userInput = Console.readLine();
+		userInputValidation.validateBlankInputOrder(userInput);
 
 		String[] splitUserInput = userInput.split(ORDER_DELIMITER);
 		userInputValidation.validateInputOrder(splitUserInput, PRODUCT_NAME_AND_QUANTITY_DELIMITER,
 			ORDER_PREFIX, ORDER_SUFFIX);
 
 		return toOrderMap(splitUserInput);
-
 	}
 
 	private Map<String, Integer> toOrderMap(String[] splitUserInput) {

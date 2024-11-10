@@ -9,6 +9,12 @@ public class UserInputValidation {
 
 	private static final Pattern NATURAL_NUMBER_PATTERN = Pattern.compile("^0*[1-9][0-9]*$");
 
+	public void validateBlankInputOrder(String inputOrder) {
+		if (inputOrder.isBlank()) {
+			throw new IllegalArgumentException(INCORRECT_INPUT_FORMAT.getMessage());
+		}
+	}
+
 	public void validateInputOrder(String[] inputOrders, String productNameAndQuantityDelimiter,
 		char orderPrefix, char orderSuffix) {
 		Arrays.stream(inputOrders)
