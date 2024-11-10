@@ -45,7 +45,9 @@ public class Promotion {
 		return availablePromotionQuantity % (buy + get);
 	}
 
-	public int getExtraQuantity(int restQuantity) {
+	public int calculateExtraQuantity(int availablePromotionQuantity) {
+		int restQuantity = calculateRestQuantity(availablePromotionQuantity);
+
 		if (buy == restQuantity) {
 			return get;
 		}

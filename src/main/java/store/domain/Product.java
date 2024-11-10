@@ -27,8 +27,8 @@ public class Product {
 		return promotion.calculateRestQuantity(availableQuantity);
 	}
 
-	public int getExtraQuantity(int restQuantity) {
-		return promotion.getExtraQuantity(restQuantity);
+	public int calculateExtraQuantity(int availablePromotionQuantity) {
+		return promotion.calculateExtraQuantity(availablePromotionQuantity);
 	}
 
 	public boolean hasPromotion() {

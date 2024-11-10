@@ -70,19 +70,19 @@ public class Stock {
 	}
 
 	public PromotionResult calculatePromotion(int purchasedQuantity) {
-		int availableQuantity = Math.min(promotionQuantity, purchasedQuantity);
+		int availablePromotionQuantity = Math.min(promotionQuantity, purchasedQuantity);
 
-		int freeQuantity = product.calculateFreeQuantity(availableQuantity);
-		int restQuantity = product.calculateRestQuantity(availableQuantity);
+		int freeQuantity = product.calculateFreeQuantity(availablePromotionQuantity);
+		int restQuantity = product.calculateRestQuantity(availablePromotionQuantity);
 
-		int extraQuantity = calculateExtraQuantity(purchasedQuantity, restQuantity);
+		int extraQuantity = calculateExtraQuantity(purchasedQuantity, availablePromotionQuantity);
 		int unApplicableQuantity = calculateUnApplicableQuantity(purchasedQuantity, restQuantity);
 
 		return PromotionResult.of(freeQuantity, extraQuantity, unApplicableQuantity);
 	}
 
-	private int calculateExtraQuantity(int purchasedQuantity, int restQuantity) {
-		int extraQuantity = product.getExtraQuantity(restQuantity);
+	private int calculateExtraQuantity(int purchasedQuantity, int availablePromotionQuantity) {
+		int extraQuantity = product.calculateExtraQuantity(availablePromotionQuantity);
 
 		if (promotionQuantity >= purchasedQuantity + extraQuantity) {
 			return extraQuantity;
