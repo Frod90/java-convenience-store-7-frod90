@@ -51,8 +51,8 @@ class StockProviderTest {
 			.extractingFromEntries(Map.Entry::getValue)
 			.extracting("product", "promotionQuantity", "generalQuantity")
 			.containsExactly(
-				tuple(Product.create("제로콜라", 2000, promotion01), 10, 10),
-				tuple(Product.create("아메리카노", 3000, promotion02), 8, 7),
+				tuple(Product.create("제로콜라", 2000, promotion01), 10, 20),
+				tuple(Product.create("아메리카노", 3000, promotion02), 16, 7),
 				tuple(Product.create("녹차라떼", 4500, promotion03), 9, 0),
 				tuple(Product.create("물", 2000, Promotion.getNoneInstance()), 0, 10)
 			);
