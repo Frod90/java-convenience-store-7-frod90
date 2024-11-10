@@ -82,7 +82,7 @@ public class Stock {
 	}
 
 	private void validatePromotionActive(LocalDateTime openDateTime) {
-		if (hasActivePromotionProductAndExistPromotionQuantity(openDateTime)) {
+		if (!hasActivePromotionProductAndExistPromotionQuantity(openDateTime)) {
 			throw new IllegalStateException(WRONG_CALL_METHOD.getMessage());
 		}
 	}
