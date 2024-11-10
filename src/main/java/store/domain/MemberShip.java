@@ -15,7 +15,7 @@ public class MemberShip {
 	}
 
 	public double getDiscountRate() {
-		if(isActive) {
+		if (isActive) {
 			return DISCOUNT_RATE;
 		}
 

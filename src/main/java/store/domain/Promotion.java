@@ -46,13 +46,12 @@ public class Promotion {
 	}
 
 	public int getExtraQuantity(int restQuantity) {
-		if(buy == restQuantity) {
+		if (buy == restQuantity) {
 			return get;
 		}
 
 		return 0;
 	}
-
 
 	public boolean isPromotion() {
 		return !isNonePromotion();

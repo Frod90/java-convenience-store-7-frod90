@@ -25,7 +25,7 @@ public class Receipt {
 	}
 
 	public long calculateNetPrice() {
-		if(freeQuantity == 0) {
+		if (freeQuantity == 0) {
 			return calculatePurchasedPrice();
 		}
 
