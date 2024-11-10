@@ -1,5 +1,6 @@
 package store.domain;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Stock {
@@ -22,6 +23,14 @@ public class Stock {
 
 	public void incrementGeneralQuantity(int generalQuantity) {
 		this.generalQuantity += generalQuantity;
+	}
+
+	public boolean hasPromotionProduct() {
+		return product.hasPromotion();
+	}
+
+	public boolean hasActivePromotionProduct(LocalDateTime comparedDateTime) {
+		return product.hasActivePromotion(comparedDateTime);
 	}
 
 	public Product getProduct() {

@@ -37,8 +37,19 @@ public class Promotion {
 		return NONE_PROMOTION;
 	}
 
+	public boolean isPromotion() {
+		return !isNonePromotion();
+	}
+
+	private boolean isNonePromotion() {
+		return this == NONE_PROMOTION;
+	}
+
+	public boolean isActive(LocalDateTime now) {
+		return now.isAfter(startDate) && now.isBefore(endDate);
+	}
+
 	public String getName() {
 		return name;
 	}
-
 }

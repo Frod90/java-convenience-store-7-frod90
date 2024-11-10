@@ -1,5 +1,6 @@
 package store.domain;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Product {
@@ -28,6 +29,14 @@ public class Product {
 
 	public Promotion getPromotion() {
 		return promotion;
+	}
+
+	public boolean hasPromotion() {
+		return promotion.isPromotion();
+	}
+
+	public boolean hasActivePromotion(LocalDateTime comparedDateTime) {
+		return promotion.isActive(comparedDateTime);
 	}
 
 	@Override
