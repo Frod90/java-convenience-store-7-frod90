@@ -19,6 +19,14 @@ public class Product {
 		return new Product(name, price, promotion);
 	}
 
+	public boolean hasPromotion() {
+		return promotion.isPromotion();
+	}
+
+	public boolean hasActivePromotion(LocalDateTime comparedDateTime) {
+		return promotion.isActive(comparedDateTime);
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -29,14 +37,6 @@ public class Product {
 
 	public Promotion getPromotion() {
 		return promotion;
-	}
-
-	public boolean hasPromotion() {
-		return promotion.isPromotion();
-	}
-
-	public boolean hasActivePromotion(LocalDateTime comparedDateTime) {
-		return promotion.isActive(comparedDateTime);
 	}
 
 	@Override

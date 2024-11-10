@@ -42,7 +42,7 @@ public class Promotion {
 	}
 
 	private boolean isNonePromotion() {
-		return this == NONE_PROMOTION;
+		return this.equals(NONE_PROMOTION);
 	}
 
 	public boolean isActive(LocalDateTime now) {
