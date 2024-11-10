@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import store.domain.Product;
@@ -14,6 +15,7 @@ import store.domain.Stocks;
 
 class StockProviderTest {
 
+	@DisplayName("파일을 읽어와 재고 목록을 생성할 수 있다.")
 	@Test
 	void provide() {
 

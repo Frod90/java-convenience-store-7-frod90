@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class StockTest {
 
-	@DisplayName("상품을 생성할 수 있다.")
+	@DisplayName("재고를 생성할 수 있다.")
 	@Test
 	void from() {
 		// given

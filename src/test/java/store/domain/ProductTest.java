@@ -78,7 +78,7 @@ class ProductTest {
 		assertThat(result).isEqualTo(expect);
 	}
 
-	@DisplayName("상품이 프로모션을 가지고 있는지 확인할 수 있다.")
+	@DisplayName("상품이 가진 프로모션 활성화되어 있는지 확인할 수 있다.")
 	@MethodSource("provideDateTimeForCheckingActivePromotion")
 	@ParameterizedTest(name = "{0} 시각에 프로모션 활성화는 {1}이다")
 	void hasActivePromotion(LocalDateTime testDateTime, boolean expect) {
