@@ -25,7 +25,7 @@ class MemberShipTest {
 			.isEqualTo(expect);
 	}
 
-	@DisplayName("멤버십을 생성할 수 있다.")
+	@DisplayName("멤버십을 할인율을 조회할 수 있다.")
 	@CsvSource({
 		"true, 0.3",
 		"false, 0"

@@ -208,7 +208,7 @@ class StockTest {
 		);
 	}
 
-	@DisplayName("재고를 초과하여 차감하려고 할 때 예외가 발생한다.")
+	@DisplayName("재고를 초과하여 차감할 수 없다.")
 	@ParameterizedTest(name = "{0}시각에 {1}개를 구매할 수 없다.")
 	@CsvSource({
 		"2001-04-25T00:00:00, 25",
