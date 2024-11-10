@@ -134,4 +134,7 @@ public class OutputHandler {
 		System.out.printf(PAYMENT_RESULT_FROMAT, totalPayment);
 	}
 
+	public void showErrorMessage(String message) {
+		System.out.println(message);
+	}
 }
