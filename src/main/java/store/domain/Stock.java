@@ -1,5 +1,7 @@
 package store.domain;
 
+import static store.common.ErrorMessage.*;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -18,11 +20,19 @@ public class Stock {
 	}
 
 	public void incrementPromotionQuantity(int promotionQuantity) {
+		validateIncrementQuantity(promotionQuantity);
 		this.promotionQuantity += promotionQuantity;
 	}
 
 	public void incrementGeneralQuantity(int generalQuantity) {
+		validateIncrementQuantity(promotionQuantity);
 		this.generalQuantity += generalQuantity;
+	}
+
+	private void validateIncrementQuantity(int quantity) {
+		if (quantity <= 0) {
+			throw new IllegalStateException(INCREMENT_NOT_NATURAL_NUMBER.getMessage());
+		}
 	}
 
 	public boolean hasPromotionProduct() {
