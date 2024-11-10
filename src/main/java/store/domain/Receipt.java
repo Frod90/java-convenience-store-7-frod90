@@ -24,7 +24,7 @@ public class Receipt {
 		return (long)product.getPrice() * freeQuantity;
 	}
 
-	public long calculateNetPrice() {
+	public long calculateNetPurchasedPrice() {
 		if (freeQuantity == 0) {
 			return calculatePurchasedPrice();
 		}

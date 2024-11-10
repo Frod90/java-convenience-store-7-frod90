@@ -36,7 +36,7 @@ public class Receipts {
 
 	public long calculateMemberShipDiscount() {
 		long netPrice = receipts.stream()
-			.mapToLong(Receipt::calculateNetPrice)
+			.mapToLong(Receipt::calculateNetPurchasedPrice)
 			.sum();
 
 		return (long)(netPrice * memberShip.getDiscountRate());
