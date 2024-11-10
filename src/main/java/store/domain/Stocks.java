@@ -33,11 +33,11 @@ public class Stocks {
 	}
 
 	public PromotionResult calculatePromotion(String productName, int purchasedQuantity,
-		LocalDateTime comparedDateTime) {
+		LocalDateTime openDateTime) {
 		Stock stock = stocks.get(productName);
 
-		if (stock.hasActivePromotionProductAndExistPromotionQuantity(comparedDateTime)) {
-			return stock.calculatePromotion(purchasedQuantity);
+		if (stock.hasActivePromotionProductAndExistPromotionQuantity(openDateTime)) {
+			return stock.calculatePromotion(purchasedQuantity, openDateTime);
 		}
 
 		return PromotionResult.of(0, 0, 0);

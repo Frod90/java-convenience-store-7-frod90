@@ -69,16 +69,22 @@ public class Stock {
 		}
 	}
 
-	public PromotionResult calculatePromotion(int purchasedQuantity) {
-		int availablePromotionQuantity = Math.min(promotionQuantity, purchasedQuantity);
+	public PromotionResult calculatePromotion(int purchasedQuantity, LocalDateTime openDateTime) {
+		validatePromotionActive(openDateTime);
 
+		int availablePromotionQuantity = Math.min(promotionQuantity, purchasedQuantity);
 		int freeQuantity = product.calculateFreeQuantity(availablePromotionQuantity);
 		int restQuantity = product.calculateRestQuantity(availablePromotionQuantity);
-
 		int extraQuantity = calculateExtraQuantity(purchasedQuantity, availablePromotionQuantity);
 		int unApplicableQuantity = calculateUnApplicableQuantity(purchasedQuantity, restQuantity);
 
 		return PromotionResult.of(freeQuantity, extraQuantity, unApplicableQuantity);
+	}
+
+	private void validatePromotionActive(LocalDateTime openDateTime) {
+		if (hasActivePromotionProductAndExistPromotionQuantity(openDateTime)) {
+			throw new IllegalStateException(WRONG_CALL_METHOD.getMessage());
+		}
 	}
 
 	private int calculateExtraQuantity(int purchasedQuantity, int availablePromotionQuantity) {
