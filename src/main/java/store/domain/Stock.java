@@ -35,6 +35,40 @@ public class Stock {
 		}
 	}
 
+	public void deductQuantity(int quantity, LocalDateTime now) {
+		if (hasActivePromotionProductAndExistPromotionQuantity(now)) {
+			deductQuantityWithPromotion(quantity);
+			return;
+		}
+
+		validateDeductQuantityWithoutPromotion(quantity);
+		generalQuantity -= quantity;
+	}
+
+	private void deductQuantityWithPromotion(int quantity) {
+		validateDeductQuantityWithPromotion(quantity);
+
+		if (quantity > promotionQuantity) {
+			generalQuantity -= (quantity - promotionQuantity);
+			promotionQuantity = 0;
+			return;
+		}
+
+		promotionQuantity -= quantity;
+	}
+
+	private void validateDeductQuantityWithPromotion(int quantity) {
+		if (quantity > promotionQuantity + generalQuantity) {
+			throw new IllegalArgumentException(OVER_FLOW_STOCK_QUANTITY.getMessage());
+		}
+	}
+
+	private void validateDeductQuantityWithoutPromotion(int quantity) {
+		if (quantity > generalQuantity) {
+			throw new IllegalArgumentException(OVER_FLOW_STOCK_QUANTITY.getMessage());
+		}
+	}
+
 	public PromotionResult calculatePromotion(int purchasedQuantity) {
 		int availableQuantity = Math.min(promotionQuantity, purchasedQuantity);
 

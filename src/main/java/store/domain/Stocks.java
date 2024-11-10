@@ -43,6 +43,15 @@ public class Stocks {
 		return PromotionResult.of(0, 0, 0);
 	}
 
+	public void deductQuantity(Receipts receipts, LocalDateTime now) {
+
+		for (Receipt receipt : receipts.getReceipts()) {
+			Product product = receipt.getProduct();
+			Stock stock = stocks.get(product.getName());
+			stock.deductQuantity(receipt.getTotalQuantity(), now);
+		}
+	}
+
 	public Map<String, Stock> getStocks() {
 		return stocks;
 	}
