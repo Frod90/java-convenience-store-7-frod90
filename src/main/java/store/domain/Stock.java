@@ -25,7 +25,7 @@ public class Stock {
 	}
 
 	public void incrementGeneralQuantity(int generalQuantity) {
-		validateIncrementQuantity(promotionQuantity);
+		validateIncrementQuantity(generalQuantity);
 		this.generalQuantity += generalQuantity;
 	}
 
