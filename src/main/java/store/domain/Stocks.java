@@ -2,6 +2,7 @@ package store.domain;
 
 import static store.common.ErrorMessage.*;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public class Stocks {
@@ -31,9 +32,15 @@ public class Stocks {
 		}
 	}
 
-	public PromotionResult calculatePromotion(String productName, int purchasedQuantity) {
+	public PromotionResult calculatePromotion(String productName, int purchasedQuantity,
+		LocalDateTime comparedDateTime) {
 		Stock stock = stocks.get(productName);
-		return stock.calculatePromotion(purchasedQuantity);
+
+		if (stock.hasActivePromotionProductAndExistPromotionQuantity(comparedDateTime)) {
+			return stock.calculatePromotion(purchasedQuantity);
+		}
+
+		return PromotionResult.of(0, 0, 0);
 	}
 
 	public Map<String, Stock> getStocks() {

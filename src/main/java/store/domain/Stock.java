@@ -67,6 +67,10 @@ public class Stock {
 		return product.hasPromotion();
 	}
 
+	public boolean hasActivePromotionProductAndExistPromotionQuantity(LocalDateTime comparedDateTime) {
+		return hasActivePromotionProduct(comparedDateTime) && promotionQuantity > 0;
+	}
+
 	public boolean hasActivePromotionProduct(LocalDateTime comparedDateTime) {
 		return product.hasActivePromotion(comparedDateTime);
 	}
