@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import store.domain.Product;
 import store.domain.Promotions;
 import store.domain.Stock;
+import store.domain.Stocks;
 import store.util.StoreFileReader;
 
 public class StockProvider {
@@ -18,9 +19,10 @@ public class StockProvider {
 	private static final int PROMOTION_INDEX = 3;
 	private static final String NONE_PROMOTION_SIGN = "null";
 
-	public Map<String, Stock> provide(Promotions promotions, String productFilePath) {
+	public Stocks provide(Promotions promotions, String productFilePath) {
 		List<String[]> infos = StoreFileReader.readWithoutHeader(productFilePath);
-		return createStocks(promotions, infos);
+		Map<String, Stock> stocks = createStocks(promotions, infos);
+		return Stocks.from(stocks);
 	}
 
 	private Map<String, Stock> createStocks(Promotions promotions, List<String[]> infos) {
