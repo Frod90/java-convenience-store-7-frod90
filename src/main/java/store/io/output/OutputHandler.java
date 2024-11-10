@@ -18,8 +18,8 @@ public class OutputHandler {
 	private static final String COUNT_COMMENT = "개";
 	private static final String EMPTY_QUANTITY_COMMENT = "재고 없음";
 	private static final String START_RECEIPT_COMMENT = "==============W 편의점================";
-	private static final String PURCHASE_DETAIL_HEADER = "상품명  \\t\\t\\t  수량  \\t\\t\\t 금액";
-	private static final String PURCHASE_DETAIL_FORMAT = "%-15s %5d %10s\\n";
+	private static final String PURCHASE_DETAIL_HEADER = "상품명  \t\t\t  수량  \t\t\t 금액";
+	private static final String PURCHASE_DETAIL_FORMAT = "%-15s %5d %10s\n";
 	private static final String PROMOTION_DETAIL_DELIMITER = "=============증      정===============";
 	private static final String PROMOTION_DETAIL_FORMAT = "%-10s \t\t %d\n";
 	private static final String PAYMENT_RESULT_DELIMITER = "====================================";
