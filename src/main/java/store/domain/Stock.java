@@ -35,6 +35,34 @@ public class Stock {
 		}
 	}
 
+	public PromotionResult calculatePromotion(int purchasedQuantity) {
+		int availableQuantity = Math.min(promotionQuantity, purchasedQuantity);
+
+		int freeQuantity = product.calculateFreeQuantity(availableQuantity);
+		int restQuantity = product.calculateRestQuantity(availableQuantity);
+
+		int extraQuantity = calculateExtraQuantity(purchasedQuantity, restQuantity);
+		int unApplicableQuantity = calculateUnApplicableQuantity(purchasedQuantity, restQuantity);
+
+		return PromotionResult.of(freeQuantity, extraQuantity, unApplicableQuantity);
+	}
+
+	private int calculateExtraQuantity(int purchasedQuantity, int restQuantity) {
+		int extraQuantity = product.getExtraQuantity(restQuantity);
+
+		if (promotionQuantity >= purchasedQuantity + extraQuantity) {
+			return extraQuantity;
+		}
+		return 0;
+	}
+
+	private int calculateUnApplicableQuantity(int purchasedQuantity, int restQuantity) {
+		if (promotionQuantity > purchasedQuantity) {
+			return 0;
+		}
+		return purchasedQuantity - promotionQuantity + restQuantity;
+	}
+
 	public boolean hasPromotionProduct() {
 		return product.hasPromotion();
 	}

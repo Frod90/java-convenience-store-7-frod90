@@ -31,6 +31,11 @@ public class Stocks {
 		}
 	}
 
+	public PromotionResult calculatePromotion(String productName, int purchasedQuantity) {
+		Stock stock = stocks.get(productName);
+		return stock.calculatePromotion(purchasedQuantity);
+	}
+
 	public Map<String, Stock> getStocks() {
 		return stocks;
 	}

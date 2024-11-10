@@ -19,6 +19,18 @@ public class Product {
 		return new Product(name, price, promotion);
 	}
 
+	public int calculateFreeQuantity(int availableQuantity) {
+		return promotion.calculateFreeQuantity(availableQuantity);
+	}
+
+	public int calculateRestQuantity(int availableQuantity) {
+		return promotion.calculateRestQuantity(availableQuantity);
+	}
+
+	public int getExtraQuantity(int restQuantity) {
+		return promotion.getExtraQuantity(restQuantity);
+	}
+
 	public boolean hasPromotion() {
 		return promotion.isPromotion();
 	}

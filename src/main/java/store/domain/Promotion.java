@@ -37,6 +37,23 @@ public class Promotion {
 		return NONE_PROMOTION;
 	}
 
+	public int calculateFreeQuantity(int availablePromotionQuantity) {
+		return availablePromotionQuantity / (buy + get) * get;
+	}
+
+	public int calculateRestQuantity(int availablePromotionQuantity) {
+		return availablePromotionQuantity % (buy + get);
+	}
+
+	public int getExtraQuantity(int restQuantity) {
+		if(buy == restQuantity) {
+			return get;
+		}
+
+		return 0;
+	}
+
+
 	public boolean isPromotion() {
 		return !isNonePromotion();
 	}
